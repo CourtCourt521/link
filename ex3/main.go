@@ -1,3 +1,13 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/CourtCourt521/link/link"
+)
+
+var exampleHTML = `
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie ie6 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="ie ie7 lt-ie9 lt-ie8"        lang="en"> <![endif]-->
@@ -52,7 +62,7 @@
       <div class="col-md-10 col-md-offset-1">
         <center>
           <p class="disclaimer">
-            Artwork created by Marcus Olsson (<a href="https://twitter.com/marcusolsson">@marcusolsson <b>OMG</b></a>), animated by Jon Calhoun (that's me!), and inspired by the original Go Gopher created by Renee French.
+            Artwork created by Marcus Olsson (<a href="https://twitter.com/marcusolsson">@marcusolsson</a>), animated by Jon Calhoun (that's me!), and inspired by the original Go Gopher created by Renee French.
           </p>
         </center>
       </div>
@@ -60,3 +70,15 @@
   </section>
 </body>
 </html>
+
+
+`
+
+func main() {
+	r := strings.NewReader(exampleHTML)
+	links, err := link.Parse(r)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v", links)
+}
